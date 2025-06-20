@@ -1,7 +1,7 @@
 resource "aws_instance" "my_first_instance" {
-  ami           = "ami-09e6f87a47903347c" # Example AMI ID, replace with a valid one for your region
-  instance_type = "t2.micro"
+  ami           = var.amiid # Example AMI ID, replace with a valid one for your region
+  instance_type = var.instance_type
   tags = {
-    Name = "MyFirstInstance"
+    Name = var.instance_name
   }
 }
