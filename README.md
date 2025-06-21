@@ -17,6 +17,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 007-remote-exec
 ├── 008-workspaces
 ├── 009-awssm-secret
+├── 010-rds-awssm
 └── README.md
 ```
 
@@ -158,6 +159,35 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 - **Notes:**
   - Make sure your local MySQL client is compatible (MySQL 8.x recommended).
   - The RDS instance will use the credentials stored in AWS Secrets Manager, managed by the `secretmanager` module.
+  - Security group and networking setup may be required to allow inbound connections from your IP.
+
+---
+
+### 011-rds-awssm-adv
+
+- **Goal:** Provision an AWS RDS MySQL instance with credentials securely generated and stored in AWS Secrets Manager, and store all DB connection details (host, port, db name, username, password) in a separate secret for application use.
+- **Files:** 
+  - `main.tf`
+  - `modules/secretmanager/main.tf`, `modules/secretmanager/variables.tf`
+  - `modules/rds/main.tf`, `modules/rds/variables.tf`
+- **How to use:**
+  1. `cd 011-rds-awssm-adv`
+  2. Edit `main.tf` to set your desired username for the secret (password will be randomly generated).
+  3. `terraform init`
+  4. `terraform apply`
+  5. After creation, you will have:
+     - A secret in AWS Secrets Manager with the DB credentials (username & random password).
+     - A separate secret in AWS Secrets Manager containing all connection info (endpoint, port, db name, username, password).
+     - An RDS instance using these credentials.
+  6. Example MySQL connection:
+     ```sh
+     mysql -h <rds-endpoint> -P 3306 -u <username> -p
+     ```
+     (You can find `<rds-endpoint>`, username, and password in the connection info secret.)
+
+- **Notes:**
+  - The password is generated only once and remains stable unless you taint or change the random password resource.
+  - Do **not** overwrite the credentials secret with connection info; always use a separate secret for connection details.
   - Security group and networking setup may be required to allow inbound connections from your IP.
 
 ---
