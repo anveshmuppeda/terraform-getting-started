@@ -135,6 +135,33 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
+### 010-rds-awssm
+
+- **Goal:** Provision an AWS RDS MySQL instance with credentials managed in AWS Secrets Manager using Terraform modules.
+- **Files:** 
+  - `main.tf`
+  - `provider.tf`
+  - `modules/secretmanager/main.tf`, `modules/secretmanager/variables.tf`
+  - `modules/rds/main.tf`, `modules/rds/variables.tf`
+- **How to use:**
+  1. `cd 010-rds-awssm`
+  2. Edit `main.tf` to set your desired username and password for the secret (or use variables).
+  3. `terraform init`
+  4. `terraform apply`
+  5. After creation, connect to your RDS instance using the endpoint, username, and password stored in Secrets Manager.
+  6. Example MySQL connection:
+     ```sh
+     mysql -h <rds-endpoint> -P 3306 -u <username> -p
+     ```
+     (You can find `<rds-endpoint>` in the AWS RDS console or Terraform outputs.)
+
+- **Notes:**
+  - Make sure your local MySQL client is compatible (MySQL 8.x recommended).
+  - The RDS instance will use the credentials stored in AWS Secrets Manager, managed by the `secretmanager` module.
+  - Security group and networking setup may be required to allow inbound connections from your IP.
+
+---
+
 ## Prerequisites
 
 - [Terraform](https://www.terraform.io/downloads.html) installed
