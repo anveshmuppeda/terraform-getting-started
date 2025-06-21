@@ -242,6 +242,33 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
+### 013-refresh-example
+
+- **Goal:** Demonstrate how to use `terraform apply -refresh-only` to sync Terraform state with real infrastructure changes made outside of Terraform.
+- **Files:** 
+  - `main.tf`
+- **How to use:**
+  1. `cd 013-refresh-example`
+  2. Deploy an EC2 instance using `terraform apply`.
+  3. Make a manual change to the EC2 instance in the AWS Console (e.g., add or modify a tag).
+  4. Run:
+     ```sh
+     terraform apply -refresh-only
+     ```
+     This updates the Terraform state file to reflect the real infrastructure.
+  5. Run:
+     ```sh
+     terraform plan
+     ```
+     Terraform will show any differences between your configuration and the actual state (e.g., tags present in state but not in `main.tf`).
+  6. To bring your configuration in sync, manually update your `main.tf` file as needed and run `terraform apply` again.
+
+- **Notes:**
+  - `terraform apply -refresh-only` only updates the state file; it does not change your infrastructure or configuration files.
+  - Always review and manually update your configuration files to match desired state after using refresh-only.
+
+---
+
 ## Prerequisites
 
 - [Terraform](https://www.terraform.io/downloads.html) installed
