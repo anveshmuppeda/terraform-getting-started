@@ -8,7 +8,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 1. **Clone this repository:**
    ```sh
-   git clone https://github.com/<your-username>/terraform-getting-started.git
+   git clone https://github.com/anveshmuppeda/terraform-getting-started.git
    cd terraform-getting-started
    ```
 
