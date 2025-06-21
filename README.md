@@ -1,6 +1,6 @@
 # Terraform Getting Started
 
-This repository demonstrates a step-by-step approach to learning Terraform, from basic concepts to advanced features like modules, remote execution, and workspaces.
+This repository demonstrates a step-by-step approach to learning Terraform, from basic concepts to advanced features like modules, remote execution, workspaces, and AWS Secrets Manager integration.
 
 ---
 
@@ -16,6 +16,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 006-s3-backend
 ├── 007-remote-exec
 ├── 008-workspaces
+├── 009-awssm-secret
 └── README.md
 ```
 
@@ -117,6 +118,20 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
   3. Apply with environment-specific variables:  
      `terraform apply -var-file=dev.tfvars`
   4. Repeat for `staging` and `prod` as needed.
+
+---
+
+### 009-awssm-secret
+
+- **Goal:** Use AWS Secrets Manager to inject secrets into your Terraform-managed infrastructure.
+- **Files:** `main.tf`, `variables.tf`, `terraform.tfvars`, `modules/ec2-app/main.tf`, `modules/ec2-app/variables.tf`
+- **How to use:**
+  1. `cd 009-awssm-secret`
+  2. Ensure you have a secret named `terraform-demo-secret` in AWS Secrets Manager with a JSON structure (e.g., `{"username": "myappuser"}`).
+  3. Update `terraform.tfvars` with your AMI ID, instance type, and other variables as needed.
+  4. `terraform init`
+  5. `terraform apply`
+  6. The EC2 instance will use the secret value (e.g., `username`) as the instance name.
 
 ---
 
