@@ -11,6 +11,7 @@ resource "aws_instance" "ec2_example" {
     }
     vpc_security_group_ids = [aws_security_group.main.id]
     key_name = var.key_name
+    associate_public_ip_address = true
 
     user_data = <<-EOF
       #!/bin/sh
@@ -18,20 +19,31 @@ resource "aws_instance" "ec2_example" {
       sudo apt install -y apache2
       sudo systemctl status apache2
       sudo systemctl start apache2
-      sudo mkdir /var/www/html
       sudo chown -R $USER:$USER /var/www/html
       EOF
     
     connection {
       type        = "ssh"
-      user        = "ec2-user"
+      user        = "ubuntu"
       private_key = file(var.private_key_path)
       host        = self.public_ip
     }
 
+    provisioner "remote-exec" {
+      inline = [
+        "sudo mkdir -p /var/www/html",
+      ]
+    }
+
     provisioner "file" {
       source      = "index.html"
-      destination = "/var/www/html/index.html"
+      destination = "/tmp/index.html"
+    }
+    provisioner "remote-exec" {
+      inline = [
+        "sudo mv /tmp/index.html /var/www/html/index.html",
+        "sudo chown www-data:www-data /var/www/html/index.html || sudo chown apache:apache /var/www/html/index.html || true"
+      ]
     }
     
 }
