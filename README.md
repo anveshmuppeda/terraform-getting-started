@@ -18,6 +18,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 008-workspaces
 ├── 009-awssm-secret
 ├── 010-rds-awssm
+├── 011-rds-awssm-advanced
 └── README.md
 ```
 
