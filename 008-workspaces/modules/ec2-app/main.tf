@@ -23,7 +23,7 @@ resource "aws_instance" "ec2_example" {
 }
 
 resource "aws_security_group" "main" {
-  name        = "terraform-example-sg"
+  name        = var.securitygroupname
   description = "Webserver for EC2 Instances"
 
   ingress {
