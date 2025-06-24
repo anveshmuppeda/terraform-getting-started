@@ -39,6 +39,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 017-foreach
 ├── 018-conditional-logic
 ├── 019-conditional-logic-2
+├── 019-conditional-logic-3
 └── README.md
 ```
 
@@ -409,6 +410,25 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 - **Notes:**
   - This example uses the `count` argument with a conditional expression to control whether each resource is created.
   - You can use this pattern to conditionally manage any resource in Terraform based on environment or other criteria.
+
+---
+
+### 020-conditional-logic-3
+
+- **Goal:** Demonstrate advanced conditional logic and filtering in Terraform using `for_each` with dynamic maps and conditions.
+- **Files:** 
+  - `main.tf`
+- **How to use:**
+  1. `cd 020-conditional-logic-3`
+  2. Review or edit the `file_names` map and the filtering logic in `main.tf`.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will create files for each environment (dev, prod, stage), but will **not** create files that are filtered out (e.g., `do_not_create_file.txt`).
+
+- **Notes:**
+  - This example uses a `for_each` with a filtered map to control which resources are created.
+  - You can easily adjust the filtering condition to include or exclude files/resources as needed for your use case.
+  - This pattern is useful for managing resources dynamically based on environment or other criteria.
 
 ---
 
