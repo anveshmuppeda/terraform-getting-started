@@ -38,6 +38,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 016-functions
 ├── 017-foreach
 ├── 018-conditional-logic
+├── 019-conditional-logic-2
 └── README.md
 ```
 
@@ -388,6 +389,26 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 - **Notes:**
   - This example uses a local value with a conditional expression (`var.age >= 18 ? "Eligible to Vote" : "Not Eligible to Vote"`).
   - You can use similar logic for any dynamic decision-making in your Terraform configurations.
+
+---
+
+### 019-conditional-logic-2
+
+- **Goal:** Demonstrate conditional resource creation in Terraform using the `count` meta-argument and boolean variables.
+- **Files:** 
+  - `main.tf`
+  - `variables.tf`
+  - `terraform.tfvars`
+- **How to use:**
+  1. `cd 019-conditional-logic-2`
+  2. Edit `terraform.tfvars` or `variables.tf` to set `is_development` or `is_production` to `true` as needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will create either a `dev_file.txt`, a `prod_file.txt`, or both, depending on which variables are set to `true`.
+
+- **Notes:**
+  - This example uses the `count` argument with a conditional expression to control whether each resource is created.
+  - You can use this pattern to conditionally manage any resource in Terraform based on environment or other criteria.
 
 ---
 
