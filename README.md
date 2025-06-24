@@ -36,6 +36,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 014-eks-cluster
 ├── 015-eks-awsmodules
 ├── 016-functions
+├── 017-foreach
 └── README.md
 ```
 
@@ -367,6 +368,25 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 - **Notes:**
   - This example uses the `local_file` resource to create environment-specific files, but the pattern can be used for any resource type.
   - You can expand the object in the map to include more fields as needed for your use case.
+
+---
+
+### 018-conditional-logic
+
+- **Goal:** Demonstrate the use of conditional expressions in Terraform to dynamically set values based on input variables.
+- **Files:** 
+  - `main.tf`
+  - `variables.tf`
+- **How to use:**
+  1. `cd 018-conditional-logic`
+  2. Edit `variables.tf` to set the `age` variable as desired.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will generate a `vote_eligibility.txt` file indicating whether the user is eligible to vote based on the provided age.
+
+- **Notes:**
+  - This example uses a local value with a conditional expression (`var.age >= 18 ? "Eligible to Vote" : "Not Eligible to Vote"`).
+  - You can use similar logic for any dynamic decision-making in your Terraform configurations.
 
 ---
 
