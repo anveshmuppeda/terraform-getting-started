@@ -33,6 +33,9 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 011-rds-awssm-advanced
 ├── 012-import-example
 ├── 013-refresh-example
+├── 014-eks-cluster
+├── 015-eks-awsmodules
+├── 016-functions
 └── README.md
 ```
 
@@ -267,6 +270,27 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 - **Notes:**
   - `terraform apply -refresh-only` only updates the state file; it does not change your infrastructure or configuration files.
   - Always review and manually update your configuration files to match desired state after using refresh-only.
+
+---
+
+### 016-functions
+
+- **Goal:** Demonstrate the use of Terraform built-in functions for string manipulation and formatting.
+- **Files:** 
+  - `main.tf`
+  - `variables.tf`
+- **How to use:**
+  1. `cd 016-functions`
+  2. Review and edit `variables.tf` to set your desired prefix, suffix, and full name.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Observe the outputs, which show examples of:
+     - String interpolation
+     - `join`, `upper`, `lower`, `title`, `length`, `format`, and `replace` functions
+
+- **Notes:**
+  - This example is useful for learning how to manipulate and format strings in Terraform outputs and resource definitions.
+  - You can extend this example to experiment with other Terraform functions as needed.
 
 ---
 
