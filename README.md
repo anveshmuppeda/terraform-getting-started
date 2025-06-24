@@ -37,6 +37,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 015-eks-awsmodules
 ├── 016-functions
 ├── 017-foreach
+├── 018-conditional-logic
 └── README.md
 ```
 
