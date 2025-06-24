@@ -301,6 +301,35 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
+### 015-eks-awsmodules
+
+- **Goal:** Create an AWS EKS cluster and managed node groups using the official [terraform-aws-modules/eks/aws](https://github.com/terraform-aws-modules/terraform-aws-eks) module for production-ready, feature-rich EKS deployments.
+- **Files:** 
+  - `main.tf`
+  - `variables.tf`
+  - `terraform.tfvars`
+- **How to use:**
+  1. `cd 015-eks-awsmodules`
+  2. Edit `terraform.tfvars` to set your cluster name, version, VPC ID, and subnet IDs.
+  3. `terraform init`
+  4. `terraform apply`
+  5. After creation, you will have:
+     - An EKS control plane (cluster) managed by the AWS EKS module
+     - Multiple managed node groups (worker nodes) attached to the cluster
+     - EKS add-ons like CoreDNS, kube-proxy, VPC CNI, and EKS Pod Identity Agent enabled by default
+
+- **Notes:**
+  - This example leverages the community-supported AWS EKS module for best practices and easier management.
+  - You can customize node group settings, add-ons, and tags in `main.tf` and `terraform.tfvars`.
+  - Make sure your subnets and VPC are properly configured for EKS.
+  - Update your kubeconfig after creation:
+    ```sh
+    aws eks update-kubeconfig --region <region> --name <cluster_name>
+    ```
+  - For more advanced options, refer to the [module documentation](https://github.com/terraform-aws-modules/terraform-aws-eks)
+
+---
+
 ### 016-functions
 
 - **Goal:** Demonstrate the use of Terraform built-in functions for string manipulation and formatting.
