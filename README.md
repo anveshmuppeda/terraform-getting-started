@@ -273,6 +273,34 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
+### 014-eks-cluster
+
+- **Goal:** Create a simple AWS EKS (Elastic Kubernetes Service) cluster and managed node group using Terraform modules.
+- **Files:** 
+  - `main.tf`
+  - `provider.tf`
+  - `modules/eks-cluster/main.tf`, `modules/eks-cluster/variables.tf`, `modules/eks-cluster/output.tf`
+  - `modules/eks-nodes/main.tf`, `modules/eks-nodes/variables.tf`
+- **How to use:**
+  1. `cd 014-eks-cluster`
+  2. Edit `main.tf` to set your desired cluster name, role names, and **replace the example subnet IDs with your actual subnet IDs**.
+  3. `terraform init`
+  4. `terraform apply`
+  5. After creation, you will have:
+     - An EKS control plane (cluster)
+     - An EKS managed node group (worker nodes) attached to the cluster
+
+- **Notes:**
+  - Make sure your subnets are in the correct VPC and have the necessary networking for EKS.
+  - You can retrieve the cluster name and subnet IDs via module outputs if needed for further configuration.
+  - You may need to update your kubeconfig to connect to the new cluster:
+    ```sh
+    aws eks update-kubeconfig --region <region> --name <cluster_name>
+    ```
+  - Additional configuration (like security groups, IAM roles, and node group scaling) can be customized in the module variables.
+
+---
+
 ### 016-functions
 
 - **Goal:** Demonstrate the use of Terraform built-in functions for string manipulation and formatting.
