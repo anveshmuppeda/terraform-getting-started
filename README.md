@@ -351,6 +351,25 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
+### 017-foreach
+
+- **Goal:** Demonstrate the use of `for_each` in Terraform to dynamically create multiple resources based on a map variable.
+- **Files:** 
+  - `main.tf`
+  - `variables.tf`
+- **How to use:**
+  1. `cd 017-foreach`
+  2. Edit `variables.tf` to define your desired environments and their properties in the `environmentVariables` map.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will generate one `.env` file per environment, with content based on the map values.
+
+- **Notes:**
+  - This example uses the `local_file` resource to create environment-specific files, but the pattern can be used for any resource type.
+  - You can expand the object in the map to include more fields as needed for your use case.
+
+---
+
 ## Prerequisites
 
 - [Terraform](https://www.terraform.io/downloads.html) installed
