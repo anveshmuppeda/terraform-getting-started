@@ -451,6 +451,7 @@ See [LICENSE](LICENSE) for details.
 2. [Kind Provider](https://registry.terraform.io/providers/tehcyx/kind/latest/docs). 
 3. [Helm Provider](https://registry.terraform.io/providers/hashicorp/helm/latest/docs). 
 4. [Kubernetes Provider](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs#credentials-config). 
+5. [aws-secrets-manager-rotation-lambdas](https://github.com/aws-samples/aws-secrets-manager-rotation-lambdas/blob/master/SecretsManagerRDSMySQLRotationSingleUser/lambda_function.py)
 
 
 **Happy Terraforming!**
