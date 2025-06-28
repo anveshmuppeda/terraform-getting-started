@@ -28,3 +28,8 @@ variable "rds_security_group_ids" {
   type = list(string)
   default = [ ]
 }
+variable "db_name" {
+  description = "RDS DB Name"
+  type = string
+  default = "demo_db"
+}

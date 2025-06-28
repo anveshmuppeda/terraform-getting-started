@@ -72,3 +72,8 @@ output "vpc_security_group_ids" {
   description = "List of Security groups"
   value = aws_security_group.rds_security_group_demo.id
 }
+
+output "vpc_id" {
+  description = "VPC ID:"
+  value = aws_vpc.rds_vpc_demo.id
+}
