@@ -446,4 +446,11 @@ See [LICENSE](LICENSE) for details.
 
 ---
 
+## References  
+1. [Manage Kubernetes resources via Terraform](https://developer.hashicorp.com/terraform/tutorials/kubernetes). 
+2. [Kind Provider](https://registry.terraform.io/providers/tehcyx/kind/latest/docs). 
+3. [Helm Provider](https://registry.terraform.io/providers/hashicorp/helm/latest/docs). 
+4. [Kubernetes Provider](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs#credentials-config). 
+
+
 **Happy Terraforming!**
