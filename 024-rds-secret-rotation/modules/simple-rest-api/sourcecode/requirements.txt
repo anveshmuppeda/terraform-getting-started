@@ -1,0 +1,3 @@
+Flask
+PyMySQL
+python-dotenv
