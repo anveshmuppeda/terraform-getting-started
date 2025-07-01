@@ -577,6 +577,39 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
+### 026-wind-logs-cloudwatch
+
+- **Goal:** Launch a Windows EC2 instance with CloudWatch integration for logs and metrics, using Terraform and PowerShell user data.
+- **Files:** 
+  - `main.tf`
+  - `variables.tf`
+  - `AWS.EC2.Windows.CloudWatch.json` (CloudWatch agent config)
+  - `user_data.ps1` (PowerShell script for setup)
+- **How to use:**
+  1. `cd 026-wind-logs-cloudwatch`
+  2. Edit `variables.tf` to set your Windows AMI ID, key pair, server name, and IAM role name as needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will:
+     - Create an IAM role and instance profile for SSM and CloudWatch.
+     - Create a security group for RDP, SSH, HTTP, and HTTPS access.
+     - Launch a Windows EC2 instance with the IAM role and security group.
+     - Use a PowerShell user data script to:
+       - Configure the CloudWatch agent with the provided JSON config.
+       - Enable IIS and logging.
+       - Enable and audit Windows Event Logs.
+       - Create a sample log entry and custom logs directory.
+       - Restart the SSM agent to pick up the new config.
+
+- **Notes:**
+  - The instance will send Windows Event Logs, IIS logs, and custom logs to CloudWatch Logs.
+  - You can customize which logs and metrics are collected by editing `AWS.EC2.Windows.CloudWatch.json`.
+  - The PowerShell script (`user_data.ps1`) is base64-encoded and passed as user data to the instance.
+  - Make sure your key pair exists in AWS and you have the corresponding `.pem` file for RDP/SSH.
+  - After launch, check the CloudWatch Log Groups in the AWS Console for logs from your
+
+---
+
 
 
 ## Prerequisites
