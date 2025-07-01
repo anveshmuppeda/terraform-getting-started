@@ -43,9 +43,9 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 021-kind-cluster
 ├── 022-deploy-pod-on-kind
 ├── 023-deploy-helm-on-kind
-├── 
-├── 
-├── 
+├── 024-rds-secret-rotation
+├── 025-ec2-with-mysql-restapi
+├── 026-wind-logs-cloudwatch
 └── README.md
 ```
 
