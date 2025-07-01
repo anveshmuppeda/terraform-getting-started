@@ -39,7 +39,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 017-foreach
 ├── 018-conditional-logic
 ├── 019-conditional-logic-2
-├── 019-conditional-logic-3
+├── 020-conditional-logic-3
 └── README.md
 ```
 
