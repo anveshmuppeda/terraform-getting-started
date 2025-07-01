@@ -41,6 +41,11 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 019-conditional-logic-2
 ├── 020-conditional-logic-3
 ├── 021-kind-cluster
+├── 022-deploy-pod-on-kind
+├── 
+├── 
+├── 
+├── 
 └── README.md
 ```
 
@@ -452,6 +457,34 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
   - The `kind` Terraform provider is used to manage the lifecycle of the Kind cluster.
   - You can use the generated kubeconfig with `kubectl` or other Kubernetes tools to interact with your local cluster.
   - This is useful for local development, testing, and CI/CD
+
+---
+
+### 022-deploy-pod-on-kind
+
+- **Goal:** Deploy an Nginx pod and service on a local Kind (Kubernetes IN Docker) cluster using Terraform.
+- **Files:** 
+  - `main.tf`
+  - `provider.tf`
+  - `variables.tf`
+- **How to use:**
+  1. `cd 022-deploy-pod-on-kind`
+  2. Edit `variables.tf` to set your desired Kind cluster name, kubeconfig path, deployment name, and namespace if needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will:
+     - Create a Kind cluster (if not already present)
+     - Deploy an Nginx deployment with 2 replicas
+     - Expose it via a ClusterIP service
+
+- **Notes:**
+  - Requires Docker to be running on your machine.
+  - The `kind` provider manages the Kind cluster, and the `kubernetes` provider deploys resources using the generated kubeconfig.
+  - After apply, use the output command to port-forward and access Nginx locally:
+    ```sh
+    kubectl port-forward service/nginx-service 8080:80 -n default
+    ```
+  - You can customize the deployment and service by editing the variables or resource definitions.
 
 ---
 
