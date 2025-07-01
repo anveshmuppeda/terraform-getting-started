@@ -40,6 +40,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 018-conditional-logic
 ├── 019-conditional-logic-2
 ├── 020-conditional-logic-3
+├── 021-kind-cluster
 └── README.md
 ```
 
@@ -429,6 +430,28 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
   - This example uses a `for_each` with a filtered map to control which resources are created.
   - You can easily adjust the filtering condition to include or exclude files/resources as needed for your use case.
   - This pattern is useful for managing resources dynamically based on environment or other criteria.
+
+---
+
+### 021-kind-cluster
+
+- **Goal:** Create a local Kubernetes cluster using [Kind](https://kind.sigs.k8s.io/) (Kubernetes IN Docker) with Terraform.
+- **Files:** 
+  - `main.tf`
+  - `provider.tf`
+  - `variable.tf`
+- **How to use:**
+  1. `cd 021-kind-cluster`
+  2. Edit `variable.tf` to set your desired cluster name and kubeconfig path if needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. After creation, a Kind cluster will be running locally and the kubeconfig will be written to the specified path (default: `~/.kube/config`).
+
+- **Notes:**
+  - Requires Docker to be running on your machine.
+  - The `kind` Terraform provider is used to manage the lifecycle of the Kind cluster.
+  - You can use the generated kubeconfig with `kubectl` or other Kubernetes tools to interact with your local cluster.
+  - This is useful for local development, testing, and CI/CD
 
 ---
 
