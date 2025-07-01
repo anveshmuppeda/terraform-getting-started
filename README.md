@@ -42,7 +42,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 020-conditional-logic-3
 ├── 021-kind-cluster
 ├── 022-deploy-pod-on-kind
-├── 
+├── 023-deploy-helm-on-kind
 ├── 
 ├── 
 ├── 
@@ -487,6 +487,97 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
   - You can customize the deployment and service by editing the variables or resource definitions.
 
 ---
+
+### 023-deploy-helm-on-kind
+
+- **Goal:** Deploy a Helm chart (e.g., Nginx) onto a local Kind (Kubernetes IN Docker) cluster using Terraform.
+- **Files:** 
+  - `main.tf`
+  - `provider.tf`
+  - `variables.tf`
+  - `nginx-chart/` (your local Helm chart directory)
+- **How to use:**
+  1. `cd 023-deploy-helm-on-kind`
+  2. Edit `variables.tf` to set your Kind cluster name, kubeconfig path, deployment name, and namespace as needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will:
+     - Create a Kind cluster (if not already present)
+     - Deploy your Helm chart (e.g., Nginx) to the cluster using the Helm provider
+
+- **Notes:**
+  - Requires Docker to be running on your machine.
+  - The `kind` provider manages the Kind cluster, the `kubernetes` provider interacts with the cluster, and the `helm` provider deploys Helm charts.
+  - You can customize the Helm release by editing the `set` block in `main.tf` or by modifying your Helm chart.
+  - After apply, you can use `kubectl` with the generated kubeconfig to inspect resources:
+    ```sh
+    kubectl get all -n <namespace>
+    ```
+  - This pattern is useful for local development, CI/CD pipelines, and testing Helm charts
+
+---
+
+### 024-rds-secret-rotation
+
+- **Goal:** Provision an AWS RDS MySQL instance with credentials stored in AWS Secrets Manager and enable automatic password rotation using a Lambda function.
+- **Files:** 
+  - `main.tf`
+  - `providers.tf`
+  - `variables.tf`
+  - `modules/db_network/main.tf`, `modules/db_network/variables.tf`
+  - `modules/rds/main.tf`, `modules/rds/variables.tf`
+  - `modules/lambda_rotation/main.tf`, `modules/lambda_rotation/variables.tf`
+- **How to use:**
+  1. `cd 024-rds-secret-rotation`
+  2. Edit `variables.tf` or `terraform.tfvars` to set your RDS instance and secret names if needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. Terraform will:
+     - Create a VPC, subnets, and security group for RDS.
+     - Deploy an RDS MySQL instance.
+     - Store the RDS credentials (username, password, host, port, dbname) in AWS Secrets Manager.
+     - Deploy a Lambda function (with PyMySQL layer) for secret rotation.
+     - Set up a VPC endpoint for Secrets Manager and all required IAM roles/policies.
+     - Enable automatic rotation of the RDS secret every 30 days.
+
+- **Notes:**
+  - The Lambda function and its layer are built automatically from the `sourcecode` and `requirements.txt` in the `lambda_rotation` module.
+  - The RDS secret in Secrets Manager will always have the latest connection info and credentials.
+  - You can customize subnet count, VPC CIDR, and security group rules in the `db_network` module.
+  - This setup is suitable for production-grade RDS deployments requiring secure, automated credential rotation.
+
+---  
+
+### 025-ec2-with-mysql-restapi
+
+- **Goal:** Provision an EC2 instance running MySQL and a Flask REST API, with all setup automated via Terraform and a user data script.
+- **Files:** 
+  - `main.tf`
+  - `providers.tf`
+  - `terraform.tfvars`
+  - `install_mysql_flask.sh` (user data script)
+- **How to use:**
+  1. `cd 025-ec2-with-mysql-restapi`
+  2. Edit `terraform.tfvars` to set your key pair name, MySQL root password, app DB password, and instance type.
+  3. Make sure you have an Ubuntu AMI ID set in your variables (e.g., via `variables.tf` or as a variable override).
+  4. `terraform init`
+  5. `terraform apply`
+  6. After creation, you will have:
+     - An EC2 instance with MySQL installed and secured.
+     - A Flask REST API running as a systemd service, connected to the MySQL database.
+     - Security group rules for SSH, MySQL (internal), Flask (port 5000), HTTP, and HTTPS.
+     - Output values for public/private IP, API endpoints, and SSH connection command.
+
+- **Notes:**
+  - The Flask app provides `/health`, `/entries` (GET/POST) endpoints for a simple guestbook.
+  - All setup is handled by the `install_mysql_flask.sh` script via EC2 user data.
+  - Use the output `flask_app_url` and `health_check_url` to test the API.
+  - The `check_services.sh` script on the instance helps verify MySQL and Flask status.
+  - Make sure your key pair exists in AWS and you have the corresponding `.pem` file for SSH.
+
+---
+
+
 
 ## Prerequisites
 
