@@ -46,6 +46,7 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 ├── 024-rds-secret-rotation
 ├── 025-ec2-with-mysql-restapi
 ├── 026-wind-logs-cloudwatch
+├── 027-ec2-autoscaling
 └── README.md
 ```
 
@@ -610,7 +611,20 @@ This repository demonstrates a step-by-step approach to learning Terraform, from
 
 ---
 
-
+### 027-ec2-autoscaling
+- **Goal:** Create an EC2 Auto Scaling Group & Application Load Balancer with a Launch Template using Terraform.
+- **Files:** 
+  - `main.tf`
+  - `provider.tf`
+- **How to use:**
+  1. `cd 027-ec2-autoscaling`
+  2. Edit `main.tf` to set your desired AMI ID, instance type, key pair name, and other variables as needed.
+  3. `terraform init`
+  4. `terraform apply`
+  5. After creation, you will have:
+     - A Launch Template for EC2 instances.
+     - An Auto Scaling Group that uses the Launch Template to manage a fleet of EC2 instances.
+     - The Auto Scaling Group will maintain a minimum and maximum number of instances based on the defined parameters.
 
 ## Prerequisites
 
